@@ -2,10 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "fast.py",
-      "use": "@vercel/python"
-    },
-    {
       "src": "main.py",
       "use": "@vercel/python"
     }
@@ -14,10 +10,6 @@
     {
       "src": "/(.*)",
       "dest": "/main.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/fast.py"
     }
   ]
 }
