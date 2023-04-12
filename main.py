@@ -1,17 +1,7 @@
-#from config import bot
+from config import bot
 from pyrogram import filters,idle,Client
 from fastapi import FastAPI
-
-
-ID = os.environ.get("ID")
-HASH = os.environ.get("HASH")
-TOKEN = os.environ.get("TOKEN")
-
-bot = Client("Asta-Robot-Vercel", 
-             api_id=ID,
-             api_hash=HASH,
-             bot_token=TOKEN,
-             in_memory=True)
+from threading import Thread
 
 app = FastAPI()
 
@@ -25,4 +15,16 @@ async def start(client,m):
     await m.reply_text("Start")
 
 
-bot.run()
+def run_fast():
+    app.run(port='0.0.0.0',port=8080)
+
+def run_thread():
+    Thread(target=run_fast).start()
+
+def run():
+    run_thread()
+    bot.start()
+    idle()
+    bot.stop()
+
+run()
