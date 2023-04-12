@@ -8,5 +8,3 @@ async def start(client,m):
 
 
 bot.start()
-idle()
-bot.stop()
