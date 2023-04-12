@@ -16,7 +16,9 @@ async def start(client,m):
 
 
 def run_fast():
-    app.run(host='0.0.0.0',port=8080)
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+    #app.run(host='0.0.0.0',port=8080)
 
 def run_thread():
     Thread(target=run_fast).start()
