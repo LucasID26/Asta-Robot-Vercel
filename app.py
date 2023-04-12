@@ -27,7 +27,7 @@ def index(request: Request, username: str = None):
     return templates.TemplateResponse("index.html", context=context)
 
 
-@app.get("/git/{username}", response_model=models.GithubUserModel)
+@app.get("/{username}", response_model=models.GithubUserModel)
 def get_github_profile(request: Request, username: str) -> Optional[models.GithubUserModel]:
 
     headers = {"accept": "application/vnd.github.v3+json"}
