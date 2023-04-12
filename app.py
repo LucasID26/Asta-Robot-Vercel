@@ -5,10 +5,19 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 import models
+from config import bot
+from pyrogram import filters,idle
+
 
 app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
+
+
+@bot.on_message(filters.command('start))
+async def start(client,m):
+    await m.reply_text("Start")
+
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -39,3 +48,7 @@ def get_github_profile(request: Request, username: str) -> Optional[models.Githu
     user.created_at = datetime.strptime(user.created_at, "%Y-%m-%dT%H:%M:%SZ").strftime("%d/%m/%y")
 
     return user
+
+bot.start()
+idle()
+bot.stop()
