@@ -1,28 +1,26 @@
-from config import bot
-from pyrogram import filters,idle,Client
-from flask import Flask
-from threading import Thread
+import os
+from pyrogram import Client, filters
+from fastapi import FastAPI
 
-app = Flask("")
+bot = Client(
+    "ASTA-ROBOT-VERCEL", 
+    api_id=os.environ.get("ID"), 
+    api_hash=os.environ.get("HASH"), 
+    bot_token=os.environ.get("TOKEN")
+)
 
-@app.route("/")
-def root():
-    return {"message": "ASTA-ROBOT RUN!"}
+app = FastAPI()
 
+@bot.on_message(filters.command("start"))
+async def start(client, m):
+    await m.reply_text("Halo! Bot Pyrogram sudah berjalan di Vercel.")
 
-@bot.on_message(filters.command('start'))
-async def start(client,m):
-    await m.reply_text("Start")
+# Route untuk halaman utama website
+@app.get("/")
+def read_root():
+    return {"Hello": "world"}
 
-
-def run_flask():
-    app.run(host='0.0.0.0',port=8080)
-
-def run_thread():
-    Thread(target=run_flask).start()
-
-def run():
-    run_thread()
-    bot.start()
-
-run()
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    bot.run()
