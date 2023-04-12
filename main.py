@@ -20,7 +20,7 @@ async def start(client, m):
 def read_root():
     return {"Hello": "world"}
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=5000)
-    bot.run()
+#if __name__ == "__main__":
+   # import uvicorn
+   # uvicorn.run(app, host="0.0.0.0", port=5000)
+bot.run()
