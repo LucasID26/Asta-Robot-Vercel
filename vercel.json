@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "fastapi.py",
+      "src": "fast.py",
       "use": "@vercel/python"
     },
     {
@@ -17,7 +17,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/fastapi.py"
+      "dest": "/fast.py"
     }
   ]
 }
