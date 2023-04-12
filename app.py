@@ -10,12 +10,8 @@ app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
 
+
 @app.get("/", response_class=HTMLResponse)
-def home():
-    return templates.TemplateResponse("home.html")
-
-
-@app.get("/git", response_class=HTMLResponse)
 def index(request: Request, username: str = None):
     if not username:
         return templates.TemplateResponse("index.html", context={"request": request})
