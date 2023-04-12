@@ -6,7 +6,7 @@ import uvicorn
 
 bot = Client(
     "ASTA-ROBOT-VERCEL",
-    api_id=os.environ.get("ID"),
+    api_id=int(os.environ.get("ID")),
     api_hash=os.environ.get("HASH"),
     bot_token=os.environ.get("TOKEN")
 )
