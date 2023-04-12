@@ -1,12 +1,12 @@
 from config import bot
 from pyrogram import filters,idle,Client
-from fastapi import FastAPI
+from flask import Flask
 from threading import Thread
 
-app = FastAPI()
+app = Flask("")
 
-@app.get("/")
-async def root():
+@app.route("/")
+def root():
     return {"message": "ASTA-ROBOT RUN!"}
 
 
@@ -15,18 +15,14 @@ async def start(client,m):
     await m.reply_text("Start")
 
 
-def run_fast():
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-    #app.run(host='0.0.0.0',port=8080)
+def run_flask():
+    app.run(host='0.0.0.0',port=8080)
 
 def run_thread():
-    Thread(target=run_fast).start()
+    Thread(target=run_flask).start()
 
 def run():
     run_thread()
     bot.start()
-    idle()
-    bot.stop()
 
 run()
