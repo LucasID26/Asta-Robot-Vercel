@@ -1,11 +1,13 @@
 import os
+from threading import Thread
 from pyrogram import Client, filters
 from fastapi import FastAPI
+import uvicorn
 
 bot = Client(
-    "ASTA-ROBOT-VERCEL", 
-    api_id=os.environ.get("ID"), 
-    api_hash=os.environ.get("HASH"), 
+    "ASTA-ROBOT-VERCEL",
+    api_id=os.environ.get("ID"),
+    api_hash=os.environ.get("HASH"),
     bot_token=os.environ.get("TOKEN")
 )
 
@@ -20,7 +22,9 @@ async def start(client, m):
 def read_root():
     return {"Hello": "world"}
 
-#if __name__ == "__main__":
-   # import uvicorn
-   # uvicorn.run(app, host="0.0.0.0", port=5000)
-bot.run()
+def run_bot():
+    bot.run()
+
+if __name__ == "__main__":
+    Thread(target=run_bot).start()
+    uvicorn.run(app, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
