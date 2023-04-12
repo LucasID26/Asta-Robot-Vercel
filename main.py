@@ -1,6 +1,6 @@
 import os
 from threading import Thread
-from pyrogram import Client, filters
+from pyrogram import Client, filters,idle
 from fastapi import FastAPI
 import uvicorn
 
@@ -23,7 +23,9 @@ def read_root():
     return {"Hello": "world"}
 
 def run_bot():
-    bot.run()
+    bot.start()
+    idle()
+    bot.stop()
 
 if __name__ == "__main__":
     Thread(target=run_bot).start()
